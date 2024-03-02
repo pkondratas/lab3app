@@ -1,22 +1,140 @@
 <!doctype html>
 <!-- This is a Jinja based template. To read more about Jinja, check
  https://jinja.palletsprojects.com/en/3.0.x/  -->
+<style>
+    @keyframes background-trans{
+        0% {
+            background-color: rgb(8, 1, 41);
+        }
+        50% {
+            background-color: rgb(36, 20, 107);
+        }
+        100% {
+            background-color: rgb(8, 1, 41);
+        }
+    }
+    .top-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        height: 20%;
+    }
+    .board-div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        min-height: 50%;
+    }
+    .form-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        min-height: 30%;
+    }
+    .submit-div {
+        display: flex;
+        justify-content: center;
+
+        padding-top: 1rem;
+    }
+    .submit-button {
+        border-radius: 7px;
+        border-color: rgb(5, 1, 10);
+        background-color: rgb(93, 78, 161);
+        color: rgb(229, 225, 245);;
+        font-weight: 700;
+        width: 5rem;
+        height: 1.5rem;
+    }
+    .message {
+        color: rgb(193, 189, 204);
+        font-size: 1.1rem;
+        font-weight: 600;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .message:hover {
+        color: rgb(113, 153, 152);
+    }
+    .name {
+        color: rgb(239, 236, 248);
+        font-size: 2.5rem;
+        font-weight: 800;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .message-date {
+        color: rgb(129, 125, 145);
+    }
+    .pagetext {
+        color: rgb(193, 189, 204);
+        font-size: 1.3rem;
+        font-weight: 800;
+        font-family: Arial, Helvetica, sans-serif;
+
+        margin: 0;
+    }
+    .form-message {
+        color: rgb(143, 140, 151);
+        font-size: 1rem;
+        font-weight: 800;
+        font-family: Arial, Helvetica, sans-serif;
+        
+    }
+    .form {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+
+        padding-top: 1rem;
+    }
+    .input {
+        border-radius: 7px;
+        border-color: rgb(5, 1, 10);
+        background-color: rgb(128, 115, 185);
+        color: rgb(229, 225, 245);;
+        font-weight: 700;
+    }
+    body {
+        animation-name: background-trans;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+
+        height: 100vh;
+        margin: 0;
+    } 
+</style>
 <title>Message board</title>
 <body>
-    <h4>There are {{ messages|length }} messages on the board.</h4>
+    <div class="top-div">
+        <h2 class="name">Paulius Kondratas</h2>
+        <h4 class="pagetext">There are {{ messages|length }} messages on the board.</h4>
+    </div>
 
-    <h4> Here are the last 10:</h4>
-    <ul>
-        {% for m in messages[-9:]|reverse %}
-            <li>
-                "{{m.content}}" <small>Posted on {{m.timestamp}}</small>
-            </li>
-        {% endfor %}
-    </ul>
-    <h4> Enter a new message</h4>
-    <form action="/">
-        <label >Your message:</label><br>
-        <input type="text" name="msg"><br>
-        <input type="submit" value="Submit">
-    </form>
+    <div class="board-div">
+        <h4 class="pagetext"> Here are the last 10:</h4>
+        <ul>
+            {% for m in messages[-9:]|reverse %}
+                <li class="message">
+                    "{{m.content}}" <small class="message-date">Posted on {{m.timestamp}}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="form-div">
+        <h4 class="pagetext"> Enter a new message</h4>
+        <form action="/">
+            <div class="form">
+                <label class="form-message">Your message:</label>
+                <input class="input" type="text" name="msg"><br>
+            </div>
+            <div class="submit-div">
+                <input class="submit-button" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
 </body>
